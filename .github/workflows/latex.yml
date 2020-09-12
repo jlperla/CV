@@ -15,10 +15,14 @@ jobs:
       - name: build pdf 
         uses: xu-cheng/latex-action@2.2.0
         with:
-          working_directory: ./output
           root_file: jesse_perla_cv.tex
+      - name: Upload files
+        uses: actions/upload-artifact@v2
+        with:
+          name: files
+          path: ./*.pdf          
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
+          publish_dir: ./
