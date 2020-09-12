@@ -13,19 +13,16 @@ jobs:
       - name: download paper repo
         uses: actions/checkout@v1
       - name: build pdf 
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v2.2
         with:
-          root_file: |
-            jesse_perla_cv.tex
+          root_file: jesse_perla_cv.tex
       - name: Upload files
         uses: actions/upload-artifact@v2
         with:
           name: files
           path: jesse_perla_cv.pdf
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        if: github.ref == 'refs/heads/master'
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: . # The folder the action should deploy.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
