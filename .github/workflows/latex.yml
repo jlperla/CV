@@ -8,21 +8,17 @@ on:
 jobs:
   latex-job:
     runs-on: ubuntu-latest
-    steps:
-      
+    steps:      
       - name: download paper repo
         uses: actions/checkout@v1
       - name: build pdf 
-        uses: xu-cheng/latex-action@2.2.0
+        uses: xu-cheng/latex-action@2.2.0        
         with:
           root_file: jesse_perla_cv.tex
-      - name: Upload files
-        uses: actions/upload-artifact@v2
-        with:
-          name: files
-          path: ./*.pdf          
+          post_compile: |
+            cp *.pdf ./output          
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./output

@@ -4,3 +4,6 @@ res.cls
 *.gz
 *.aux
 *.pdf
+*.nojekyll
+*.fdb_latexmk
+*.fls
